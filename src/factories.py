@@ -1,4 +1,4 @@
-from models import SalaIndvidual, SalaGrupo, SalaLaboratorio
+from models import SalaIndividual, SalaGrupo, SalaLaboratorio
 from abc import ABC, abstractmethod
 
 class SalaFactory:
@@ -8,7 +8,7 @@ class SalaFactory:
 
 class FactorySalaIndividual(SalaFactory):
     def criar_sala(self, id):
-        return SalaIndvidual(id, capacidade=1)
+        return SalaIndividual(id, capacidade=1)
     
 class FactorySalaGrupo(SalaFactory):
     def criar_sala(self, id):
