@@ -38,4 +38,20 @@ class RelatoriodiarioService(Observador):
     def atualizar(self, evento: str, dados: dict | None = None): 
         repo = ReservaRepositorio.get_instance()
         reservas = repo.listar()
-        print(f"[Relatório] Evento '{evento}' detectado. Total de reservas: {len(reservas)}.")
+        confirmadas = [r for r in reservas if r.status == "confirmada"]
+
+        if not confirmadas:
+            print("[Relatório Diário] Nenhuma reserva confirmada.")
+        else:
+            agrupa = {}
+            for r in confirmadas:
+                agrupa.setdefault(r.sala.id, []).append(r)
+
+            for sala_id, lista in agrupa.items():
+                print(f"\nSala: {sala_id}")
+                for r in lista:
+                    print(f"  • {r.usuario.nome} ({r.tipo_usuario}) | {r.inicio} → {r.fim}")
+
+            print(f"\nTotal de reservas confirmadas: {len(confirmadas)}")
+
+            
