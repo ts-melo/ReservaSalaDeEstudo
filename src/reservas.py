@@ -18,3 +18,7 @@ class Reserva(Observavel):
         self.inicio = novo_inicio
         self.fim = novo_fim
         self.notificar("modificacao", {"inicio": novo_inicio, "fim": novo_fim, "reserva": self})
+    
+    def descricao(self):
+        return f"Reserva | Sala {self.sala.id} | {self.usuario.nome}"
+
